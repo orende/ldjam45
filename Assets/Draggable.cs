@@ -2,26 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Draggable : MonoBehaviour
-{
-    // Start is called before the first frame update
+[RequireComponent(typeof(GameObject))]
+public class Draggable : MonoBehaviour {
+    public GameObject parentGameObject;
+
     private bool isDragging = false;
-    void Start()
-    {
+    void Start() {
              
     }
 
-    // Update is called once per frame
-    void OnGui()
-    {
-      if(Input.GetMouseButton(1)) {
+    void Update() {
+      if (Input.GetMouseButton(1)) {
         this.isDragging = true;
+        Debug.Log("Dragging");
       } else {
         this.isDragging = false;
       }
 
-      if(isDragging()) {
-
+      if (isDragging) {
+        Debug.Log(Input.mousePosition);
+        parentGameObject.transform.position = Input.mousePosition;
       }
     }
 }
