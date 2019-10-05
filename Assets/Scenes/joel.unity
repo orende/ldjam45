@@ -620,6 +620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
+  rig: {fileID: 0}
 --- !u!114 &2136328470
 MonoBehaviour:
   m_ObjectHideFlags: 0
