@@ -13,34 +13,42 @@ public class ConectClues : MonoBehaviour
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Conect(GameObject clue)
     {
-        if (firstClue==null)
+        Debug.Log("Conect");
+        if(clue != null)
         {
-            firstClue=clue.transform;
-            return;
-        }
+            if (firstClue==null)
+            {
+                firstClue=clue.transform;  
+                Debug.Log("set furst:"+ clue);         
+                return;
+            }
 
-        if(secundClue==null)
-        {
-            secundClue=clue.transform;
-        }
+            if(secundClue==null && clue.name != firstClue.name)
+            {
+                secundClue=clue.transform;
+                Debug.Log("set secundClue:"+ clue.name);
+            }
 
-        if(firstClue != null && secundClue !=null)
+            if(firstClue != null && secundClue !=null)
+            {
+                Debug.Log("conect furst and secund");
+                //conect furst and secund
+                //EmtyConections();
+            }
+        }
+        else
         {
-            //conect furst and secund
-            firstClue= null;
-            secundClue =null;
+            Debug.Log("Conect: No GameObject found");
         }
     }
 
+    private void EmtyConections()
+    {
+        firstClue= null;
+        secundClue =null;
+    }
     //         if (modeHandler.mode == ModeHandlerScript.MouseMode.MOVE) { 
     //         isDragging = true;
     //     }
