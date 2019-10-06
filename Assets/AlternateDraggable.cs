@@ -24,7 +24,7 @@ public class AlternateDraggable : EventTrigger
 
     public override void OnPointerDown(PointerEventData eventData) {
         if (eventData.button == PointerEventData.InputButton.Left) {
-            Debug.Log ("Right Mouse Button Clicked on: " + name);
+            Debug.Log ("LMB down");
             dragging = true;
         }
         if (eventData.button == PointerEventData.InputButton.Right) {
@@ -34,6 +34,7 @@ public class AlternateDraggable : EventTrigger
 
     public override void OnPointerUp(PointerEventData eventData) {
         if (eventData.button == PointerEventData.InputButton.Left) {
+            Debug.Log("LMB up");
             dragging = false;
         }
         if (eventData.button == PointerEventData.InputButton.Right) {

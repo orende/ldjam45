@@ -6,12 +6,16 @@ using UnityEngine.EventSystems;
 
 public class Draggable : EventTrigger {
     private bool isDragging = false;
+
     [SerializeField]
     public Rigidbody2D rig;
+
+    private ModeHandlerScript modeHandler;
 
     void Start() {
         rig = GetComponent<Rigidbody2D>();
         Debug.Log("rig:"+ rig);
+        modeHandler = GameObject.FindObjectOfType<ModeHandlerScript>();
     }
 
     void Update() {
@@ -20,7 +24,9 @@ public class Draggable : EventTrigger {
 
     public override void OnBeginDrag(PointerEventData data)
     {
-        isDragging = true;
+        if (modeHandler.mode == ModeHandlerScript.MouseMode.MOVE) { 
+            isDragging = true;
+        }
     }
 
     public override void OnCancel(BaseEventData data)
@@ -33,9 +39,11 @@ public class Draggable : EventTrigger {
 
     public override void OnDrag(PointerEventData data)
     {
-        rig.transform.position += new Vector3(data.delta.x, data.delta.y, 0);
-        // rig.transform.position += new Vector3(Input.mousePosition.x,Input.mousePosition.y, 0);
-        Debug.Log("Position:" + rig.transform.position);
+        if (modeHandler.mode == ModeHandlerScript.MouseMode.MOVE) { 
+            rig.transform.position += new Vector3(data.delta.x, data.delta.y, 0);
+            // rig.transform.position += new Vector3(Input.mousePosition.x,Input.mousePosition.y, 0);
+            Debug.Log("Position:" + rig.transform.position);
+        }
     }
 
     public override void OnDrop(PointerEventData data)
@@ -44,7 +52,9 @@ public class Draggable : EventTrigger {
 
     public override void OnEndDrag(PointerEventData data)
     {
-        isDragging = false;
+        if (modeHandler.mode == ModeHandlerScript.MouseMode.MOVE) { 
+            isDragging = false;
+        }
     }
 
     public override void OnInitializePotentialDrag(PointerEventData data)
@@ -57,9 +67,9 @@ public class Draggable : EventTrigger {
 
     public override void OnPointerClick(PointerEventData data)
     {
-        if (!isDragging)
-        {
-            Debug.Log("Click.");
+        if (modeHandler.mode == ModeHandlerScript.MouseMode.LOOKING_GLASS) {
+            // DO ZOOM HERE
+            Debug.Log("ZOOMING ON OBJECT");
         }
     }
 
