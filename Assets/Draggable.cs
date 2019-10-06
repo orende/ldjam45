@@ -6,8 +6,12 @@ using UnityEngine.EventSystems;
 
 public class Draggable : EventTrigger {
     private bool isDragging = false;
+    [SerializeField]
+    public Rigidbody2D rig;
 
     void Start() {
+        rig = GetComponent<Rigidbody2D>();
+        Debug.Log("rig:"+ rig);
     }
 
     void Update() {
@@ -29,7 +33,9 @@ public class Draggable : EventTrigger {
 
     public override void OnDrag(PointerEventData data)
     {
-        transform.position += new Vector3(data.delta.x, data.delta.y, 0);
+        rig.transform.position += new Vector3(data.delta.x, data.delta.y, 0);
+        // rig.transform.position += new Vector3(Input.mousePosition.x,Input.mousePosition.y, 0);
+        Debug.Log("Position:" + rig.transform.position);
     }
 
     public override void OnDrop(PointerEventData data)
