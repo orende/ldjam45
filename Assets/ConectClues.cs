@@ -1,17 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ConectClues : MonoBehaviour
 {
 
-    public Transform firstClue;
-    public Transform secundClue;
+    public GameObject firstClue;
+    public GameObject secundClue;
+    public ConnectebulClueSertcher sertcher;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        sertcher = GameObject.FindObjectOfType<ConnectebulClueSertcher>(); 
     }
     public void Conect(GameObject clue)
     {
@@ -20,21 +22,21 @@ public class ConectClues : MonoBehaviour
         {
             if (firstClue==null)
             {
-                firstClue=clue.transform;  
+                firstClue=clue;  
                 Debug.Log("set furst:"+ clue);         
                 return;
             }
 
             if(secundClue==null && clue.name != firstClue.name)
             {
-                secundClue=clue.transform;
+                secundClue=clue;
                 Debug.Log("set secundClue:"+ clue.name);
             }
 
-            if(firstClue != null && secundClue !=null)
+            if(firstClue != null && secundClue !=null) //conect furst and secund
             {
                 Debug.Log("conect furst and secund");
-                //conect furst and secund
+                sertcher.goFrue(firstClue,secundClue);
                 //EmtyConections();
             }
         }
@@ -49,7 +51,4 @@ public class ConectClues : MonoBehaviour
         firstClue= null;
         secundClue =null;
     }
-    //         if (modeHandler.mode == ModeHandlerScript.MouseMode.MOVE) { 
-    //         isDragging = true;
-    //     }
 }
