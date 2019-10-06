@@ -11,11 +11,13 @@ public class Draggable : EventTrigger {
     public Rigidbody2D rig;
 
     private ModeHandlerScript modeHandler;
+    private ConectClues clueHandler;
 
     void Start() {
         rig = GetComponent<Rigidbody2D>();
         Debug.Log("rig:"+ rig);
         modeHandler = GameObject.FindObjectOfType<ModeHandlerScript>();
+        clueHandler = GameObject.FindObjectOfType<ConectClues>();
     }
 
     void Update() {
@@ -70,6 +72,12 @@ public class Draggable : EventTrigger {
         if (modeHandler.mode == ModeHandlerScript.MouseMode.LOOKING_GLASS) {
             // DO ZOOM HERE
             Debug.Log("ZOOMING ON OBJECT");
+            data.pointerPress.GetComponent<ZoomHandler>().Trigger();
+        }
+
+        if (modeHandler.mode == ModeHandlerScript.MouseMode.CONNECT_CLUES)
+        {
+            clueHandler.Conect(data.pointerPress);
         }
     }
 
