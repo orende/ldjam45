@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DialogHandler : MonoBehaviour {
     int hasSeen = -1;
     protected List<DialogEntry> entries = new List<DialogEntry>();
+    public UnityEvent onFinishEvents;
 
 
     public bool hasMoreDialog()
@@ -22,5 +24,7 @@ public class DialogHandler : MonoBehaviour {
         }
     }
 
-    public void onFinish() {}
+    public void onFinish() {
+        onFinishEvents.Invoke();
+    }
 }

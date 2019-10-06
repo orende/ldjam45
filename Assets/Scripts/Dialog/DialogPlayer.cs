@@ -16,11 +16,6 @@ public class DialogPlayer : MonoBehaviour
     private DialogHandler currentDialog;
     private Image image;
 
-    
-
-    bool noMoreDialog = false;
-
-
     void Start()
     {
         textMeshUguu = textPanelGameObject.transform.Find("DialogText").GetComponent<TextMeshProUGUI>();
@@ -30,19 +25,16 @@ public class DialogPlayer : MonoBehaviour
 
     public void nextDialog()
     {
-            DialogEntry dialogEntry = currentDialog.getNextDialog();
-        if (dialogEntry != null)
-        {
+        DialogEntry dialogEntry = currentDialog.getNextDialog();
+        if (dialogEntry != null) {
             string dialog = dialogEntry.dialog;
             textMeshUguu.text = dialog;
             SpriteRenderer sprite = portraits.transform.Find(dialogEntry.speakingCharacterName).GetComponent<SpriteRenderer>();
             image.sprite = sprite.sprite;
-        } else
-        {
+        } else {
             textPanelGameObject.SetActive(false);
         }
-        if(!currentDialog.hasMoreDialog())
-        {
+        if (!currentDialog.hasMoreDialog()) {
             buttonText.text = "Close";
         }
 
@@ -51,16 +43,10 @@ public class DialogPlayer : MonoBehaviour
 
     public void triggerDialog(string dialogName)
     {
+        Debug.Log("Show dialog " + dialogName);
         currentDialog = dialogues.transform.Find(dialogName).GetComponent<DialogHandler>();
-        noMoreDialog = false;
+        textPanelGameObject.SetActive(true);
         nextDialog();
     }
 
-    void Update()
-    {
-        if(noMoreDialog)
-        {
-            textPanelGameObject.SetActive(false);
-        }
-    }
 }

@@ -11,9 +11,9 @@ public class FirstLevelDialog : DialogHandler
                 "I haven't seen my worker for a couple of days. Maybe he forgot where he works, or he ded. Can you find the lazy (or dead) bastard for me?"));
         this.entries.Add(
             new DialogEntry("detective",
-                "Ya sure I'll find your guy"));
+                "I'll find him. Joe Average have never lost a case."));
         this.entries.Add(
             new DialogEntry("detective",
-                "This case smelled, like a dead fish. Still, I needed the money."));
+                "This case smelled like a dead fish. Still, I needed the money."));
     }
 }
