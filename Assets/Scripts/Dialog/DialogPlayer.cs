@@ -6,15 +6,16 @@ using UnityEngine.UI;
 
 public class DialogPlayer : MonoBehaviour
 {
-    
-    public GameObject dialogHandlerGameObject;
+
+    public GameObject dialogues;
     public GameObject textPanelGameObject;
     public GameObject portraits;
 
     private TextMeshProUGUI textMeshUguu;
     private TextMeshProUGUI buttonText;
-    private DialogHandler dialogHandler;
+    private DialogHandler currentDialog;
     private Image image;
+
     
 
     bool noMoreDialog = false;
@@ -22,36 +23,37 @@ public class DialogPlayer : MonoBehaviour
 
     void Start()
     {
-        dialogHandler = dialogHandlerGameObject.GetComponent<DialogHandler>();
         textMeshUguu = textPanelGameObject.transform.Find("DialogText").GetComponent<TextMeshProUGUI>();
         buttonText = textPanelGameObject.transform.Find("Button").GetComponentInChildren<TextMeshProUGUI>();
         image = textPanelGameObject.transform.Find("Portrait").GetComponent<Image>();
-
-
-        this.nextDialog();
     }
 
     public void nextDialog()
     {
-        if (dialogHandler.isLastDialog())
+            DialogEntry dialogEntry = currentDialog.getNextDialog();
+        if (dialogEntry != null)
+        {
+            string dialog = dialogEntry.dialog;
+            textMeshUguu.text = dialog;
+            SpriteRenderer sprite = portraits.transform.Find(dialogEntry.speakingCharacterName).GetComponent<SpriteRenderer>();
+            image.sprite = sprite.sprite;
+        } else
+        {
+            textPanelGameObject.SetActive(false);
+        }
+        if(!currentDialog.hasMoreDialog())
         {
             buttonText.text = "Close";
         }
-        else if (dialogHandler.hasMoreDialog())
-        {
-            DialogEntry dialogEntry = dialogHandler.getNextDialog();
-            string dialog = dialogEntry.dialog;
-            SpriteRenderer sprite = portraits.transform.Find(dialogEntry.speakingCharacterName).GetComponent<SpriteRenderer>();
 
-            image.sprite = sprite.sprite;
 
-            textMeshUguu.text = dialog;
-        }
-        else
-        {
-            this.noMoreDialog = true;
-        }
+    }
 
+    public void triggerDialog(string dialogName)
+    {
+        currentDialog = dialogues.transform.Find(dialogName).GetComponent<DialogHandler>();
+        noMoreDialog = false;
+        nextDialog();
     }
 
     void Update()
