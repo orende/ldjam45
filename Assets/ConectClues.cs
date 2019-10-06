@@ -9,6 +9,7 @@ public class ConectClues : MonoBehaviour
     public GameObject firstClue;
     public GameObject secundClue;
     public ConnectebulClueSertcher sertcher;
+    public UnityEvent emtyConectionsEvent;
 
     // Start is called before the first frame update
     void Start()
@@ -37,8 +38,9 @@ public class ConectClues : MonoBehaviour
             {
                 Debug.Log("conect furst and secund");
                 sertcher.goFrue(firstClue,secundClue);
-                //EmtyConections();
+                
             }
+            EmtyConections();
         }
         else
         {
@@ -50,5 +52,6 @@ public class ConectClues : MonoBehaviour
     {
         firstClue= null;
         secundClue =null;
+        emtyConectionsEvent.Invoke();
     }
 }

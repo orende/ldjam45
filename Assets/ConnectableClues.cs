@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class ConnectableClues : MonoBehaviour
 {
-    public GameObject[] connectableClues;
+   // public GameObject[] connectableClues;
     public GameObject objektA;
     public GameObject objektB;
 
