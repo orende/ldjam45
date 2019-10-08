@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Dialog",menuName = "Dialog")]
 public class DialogHolder : ScriptableObject
 {
-    public TextAsset dialog;
     public Sprite character;
+    [TextArea(2, 20)]
+    public string dialog;  
 }
